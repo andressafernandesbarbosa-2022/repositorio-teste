@@ -1,0 +1,542 @@
+/* ==========================================================================
+   VARIABLES & DESIGN SYSTEM
+   ========================================================================== */
+:root {
+    --primary-color: #2e7d32;
+    --primary-hover: #1b5e20;
+    --secondary-color: #1565c0;
+    --dark-color: #1a2332;
+    --light-color: #f4f6f8;
+    --white: #ffffff;
+    --text-muted: #546e7a;
+    --border-radius: 16px;
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --transition: all 0.3s ease;
+    
+    /* Fluid Typography via clamp */
+    --font-base: clamp(0.9375rem, 0.9rem + 0.18vw, 1.125rem);
+    --font-h1: clamp(2.25rem, 1.8rem + 2.25vw, 4rem);
+    --font-h2: clamp(1.75rem, 1.5rem + 1.25vw, 2.75rem);
+    --font-h3: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);
+}
+
+/* ==========================================================================
+   RESET & GLOBAL STYLES
+   ========================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    font-size: var(--font-base);
+    line-height: 1.6;
+    color: var(--dark-color);
+    background-color: var(--white);
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ==========================================================================
+   ACCESSIBILITY BAR
+   ========================================================================== */
+.accessibility-bar {
+    background-color: var(--dark-color);
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.accessibility-bar button {
+    background: transparent;
+    border: 1px solid var(--white);
+    color: var(--white);
+    padding: 0.25rem 0.75rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    transition: var(--transition);
+}
+
+.accessibility-bar button:hover {
+    background-color: var(--white);
+    color: var(--dark-color);
+}
+
+/* ==========================================================================
+   REUSABLE COMPONENTS & LAYOUT
+   ========================================================================== */
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 3vw, 4rem);
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr));
+    gap: clamp(1.5rem, 3vw, 3rem);
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+    gap: clamp(1.5rem, 3vw, 3rem);
+}
+
+.section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto clamp(2rem, 4vw, 4rem);
+}
+
+.section-header h2 {
+    font-size: var(--font-h2);
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+}
+
+.section-header p {
+    color: var(--text-muted);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.875rem 2rem;
+    font-weight: 600;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    cursor: pointer;
+    text-align: center;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+}
+
+.btn-secondary:hover {
+    background-color: #e2e8f0;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+.header {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1.25rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+}
+
+.logo span {
+    color: var(--primary-color);
+}
+
+.nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav a {
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: var(--transition);
+}
+
+.nav a:hover {
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .nav, .header .btn {
+        display: none;
+    }
+}
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+.hero {
+    padding: clamp(4rem, 8vw, 8rem) 0;
+    background: radial-gradient(circle at 90% 10%, rgba(46, 125, 50, 0.05) 0%, rgba(255,255,255,0) 70%);
+}
+
+.hero-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 550px), 1fr));
+    align-items: center;
+    gap: 4rem;
+}
+
+.badge {
+    display: inline-block;
+    background-color: rgba(46, 125, 50, 0.1);
+    color: var(--primary-color);
+    padding: 0.5rem 1.25rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero-content h1 {
+    font-size: var(--font-h1);
+    color: var(--dark-color);
+    margin-bottom: 1.5rem;
+}
+
+.hero-content p {
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+    font-size: 1.2rem;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.hero-image {
+    position: relative;
+}
+
+.image-placeholder {
+    width: 100%;
+    height: 450px;
+    background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.stats-card {
+    position: absolute;
+    bottom: -20px;
+    left: 40px;
+    background: var(--white);
+    padding: 1.5rem 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.stats-card strong {
+    display: block;
+    font-size: 2rem;
+    color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ==========================================================================
+   BENEFÍCIOS / CARDS
+   ========================================================================== */
+.beneficios {
+    padding: clamp(4rem, 6vw, 6rem) 0;
+    background-color: var(--light-color);
+}
+
+.card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.card h3 {
+    font-size: var(--font-h3);
+    margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   CARROSSEL (SOLUÇÕES)
+   ========================================================================== */
+.solucoes {
+    padding: clamp(4rem, 6vw, 6rem) 0;
+    overflow: hidden;
+}
+
+.carousel-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-item {
+    min-width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.carousel-content {
+    background: var(--light-color);
+    padding: 3rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .carousel-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+.carousel-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.carousel-nav button {
+    background: var(--white);
+    border: 1px solid #e2e8f0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.25rem;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.carousel-nav button:hover {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+/* ==========================================================================
+   DEPOIMENTOS
+   ========================================================================== */
+.depoimentos {
+    padding: clamp(4rem, 6vw, 6rem) 0;
+    background-color: var(--dark-color);
+    color: var(--white);
+}
+
+.depoimentos .section-header h2 {
+    color: var(--white);
+}
+
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 3rem;
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.testimonial-text {
+    font-style: italic;
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+}
+
+.testimonial-author strong {
+    display: block;
+    color: var(--primary-color);
+}
+
+/* ==========================================================================
+   ACORDEÃO (FAQ)
+   ========================================================================== */
+.faq {
+    padding: clamp(4rem, 6vw, 6rem) 0;
+    background: var(--light-color);
+}
+
+.accordion {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.accordion-item {
+    background: var(--white);
+    margin-bottom: 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+}
+
+.accordion-header {
+    width: 100%;
+    padding: 1.5rem 2rem;
+    text-align: left;
+    background: none;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0 2rem;
+    color: var(--text-muted);
+}
+
+.accordion-item.active .accordion-content {
+    padding-bottom: 1.5rem;
+}
+
+/* ==========================================================================
+   CTA & FORMULÁRIO
+   ========================================================================== */
+.cta-section {
+    padding: clamp(4rem, 8vw, 8rem) 0;
+}
+
+.cta-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 450px), 1fr));
+    gap: 4rem;
+    align-items: center;
+}
+
+.cta-info h2 {
+    font-size: var(--font-h2);
+    margin-bottom: 1.5rem;
+}
+
+.urgency-tag {
+    margin-top: 2rem;
+    font-weight: 600;
+    color: #c62828;
+}
+
+.cta-form-wrapper {
+    background: var(--white);
+    padding: 3rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.footer-bottom {
+    background-color: var(--dark-color);
+    color: rgba(255, 255, 255, 0.6);
+    padding: 2rem 0;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.875rem;
+}
+
+/* ==========================================================================
+   BLINDAGEM DO MODO DE CONTRASTE (EXEGESE DE ALTA ESPECIFICIDADE)
+   ========================================================================== */
+body.high-contrast, body.high-contrast *:not(i):not(.icon) {
+    background-color: #000 !important;
+    color: #fff !important;
+    border: 1px solid #ff0 !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+body.high-contrast a, body.high-contrast button {
+    color: #ff0 !important;
+    text-decoration: underline !important;
+    font-weight: bold !important;
+}
